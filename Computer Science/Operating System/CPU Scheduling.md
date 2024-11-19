@@ -14,14 +14,14 @@
 
 ### 2. 선점 / 비선점 스케줄링
 
-- 선점 (preemptive) : OS가 CPU의 사용권을 선점할 수 있는 경우, 강제 회수하는 경우
-- 비선점 (nonpreemptive) : 프로세스 종료 or I/O 등의 이벤트가 있을 때까지 실행 보장 (처리시간 예측 어려움)
+- 선점 (preemptive) : OS가 CPU의 사용권을 선점할 수 있는 경우, 강제 회수하는 경우 (처리시간 예측 어려움)
+- 비선점 (nonpreemptive) : 프로세스 종료 or I/O 등의 이벤트가 있을 때까지 실행 보장 (처리시간 예측 용이함)
 
 ### 3. 프로세스 상태
 
 ![download (5)](https://user-images.githubusercontent.com/13609011/91695344-f2dfae80-eba8-11ea-9a9b-702192316170.jpeg)
-- 비선점 스케줄링 : `Interrupt`, `Scheduler Dispatch`
-- 선점 스케줄링 : `I/O or Event Wait`
+- 선점 스케줄링 : `Interrupt`, `I/O or Event Completion`, `I/O or Event Wait`, `Exit`
+- 비선점 스케줄링 : `I/O or Event Wait`, `Exit`
 
 ---
 
@@ -56,7 +56,7 @@
         - 우선 순위가 낮은 프로세스가 무한정 기다리는 Starvation 이 생길 수 있음
         - Aging 방법으로 Starvation 문제 해결 가능
     2. Round Robin
-        - FCFS에 의해 프로세스들이 보내지면 각 프로세스는 동일한 시간의 `Time Quantum` 만큼 CPU를 할달 받음
+        - FCFS에 의해 프로세스들이 보내지면 각 프로세스는 동일한 시간의 `Time Quantum` 만큼 CPU를 할당 받음
             - `Time Quantum` or `Time Slice` : 실행의 최소 단위 시간
         - 할당 시간(`Time Quantum`)이 크면 FCFS와 같게 되고, 작으면 문맥 교환 (Context Switching) 잦아져서 오버헤드 증가
     3. Multilevel-Queue (다단계 큐)
@@ -74,7 +74,7 @@
         - 다단계 큐에서 자신의 `Time Quantum`을 다 채운 프로세스는 밑으로 내려가고 자신의 `Time Quantum`을 다 채우지 못한 프로세스는 원래 큐 그대로
             - Time Quantum을 다 채운 프로세스는 CPU burst 프로세스로 판단하기 때문
         - 짧은 작업에 유리, 입출력 위주(Interrupt가 잦은) 작업에 우선권을 줌
-        - 처리 시간이 짧은 프로세스를 먼저 처리하기 때문에 Turnaround 평균 시간을 줄옂줌
+        - 처리 시간이 짧은 프로세스를 먼저 처리하기 때문에 Turnaround 평균 시간을 줄여줌
 
 ### 5. CPU 스케줄링 척도
 
@@ -87,13 +87,8 @@
 
 ### 출처
 
-- 스케줄링 목표 : [https://jhnyang.tistory.com/29?category=815411](https://jhnyang.tistory.com/29?category=815411)
-- 프로세스 전이도 그림 출처 : [https://rebas.kr/852](https://rebas.kr/852)
-- CPU 스케줄링 종류 및 정의 참고 : [https://m.blog.naver.com/PostView.nhn?blogId=so_fragrant&logNo=80056608452&proxyReferer=https:%2F%2Fwww.google.com%2F](https://m.blog.naver.com/PostView.nhn?blogId=so_fragrant&logNo=80056608452&proxyReferer=https:%2F%2Fwww.google.com%2F)
-- 다단계큐 참고 : [https://jhnyang.tistory.com/28](https://jhnyang.tistory.com/28)
-- 다단계 피드백 큐 참고 : [https://jhnyang.tistory.com/156](https://jhnyang.tistory.com/156)
-
-
-
-### 기존 자료 (이미지 형태)
-[https://github.com/kim6394/tech-interview-for-developer/blob/master/resources/CPU%20%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81.PNG?raw=true](https://github.com/kim6394/tech-interview-for-developer/blob/master/resources/CPU%20%EC%8A%A4%EC%BC%80%EC%A4%84%EB%A7%81.PNG?raw=true)
+- 스케줄링 목표 : [링크](https://jhnyang.tistory.com/29?category=815411)
+- 프로세스 전이도 그림 출처 : [링크](https://rebas.kr/852)
+- CPU 스케줄링 종류 및 정의 참고 : [링크](https://m.blog.naver.com/PostView.nhn?blogId=so_fragrant&logNo=80056608452&proxyReferer=https:%2F%2Fwww.google.com%2F)
+- 다단계큐 참고 : [링크](https://jhnyang.tistory.com/28)
+- 다단계 피드백 큐 참고 : [링크](https://jhnyang.tistory.com/156)
